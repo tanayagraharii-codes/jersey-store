@@ -14,7 +14,7 @@ Cash on Delivery), order tracking, and a password-protected admin dashboard.
 
 ## 1. Install
 
-You'll need [Node.js](https://nodejs.org) (v18 or later) installed.
+First of all install [Node.js](https://nodejs.org) (v18 or later)
 
 ```bash
 cd jersey-store
@@ -78,23 +78,7 @@ To go live: complete Razorpay's KYC/activation, then switch your `.env` keys fro
 
 ## 6. Deploying
 
-You have two good options. Both need your GitHub repo set up first.
-
-### Getting your code onto GitHub
-
-1. Create a repo at [github.com](https://github.com)
-2. Easiest path: install [GitHub Desktop](https://desktop.github.com), **File → Add Local Repository**, select this folder, commit, and publish. It automatically respects `.gitignore`, so `node_modules` and `.env` never get uploaded.
-3. If using the website's drag-and-drop upload instead, only drag in the files listed under "What's included" above plus `package.json`, `package-lock.json`, `.gitignore`, and `.env.example` — **never** `node_modules` (GitHub's uploader can't handle that many files) or your real `.env`.
-
-### Option A: Render (simpler, recommended for this app)
-
-1. [render.com](https://render.com) → **New → Web Service** → connect your repo
-2. Build command: `npm install` — Start command: `npm start`
-3. Add environment variables: `ADMIN_PASSWORD`, `SESSION_SECRET`, `MONGODB_URI`, `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`
-4. Deploy, then set `DOMAIN` to your live Render URL
-5. Free tier sleeps after inactivity (~50s wake-up delay for the next visitor) — upgrade to the Starter plan (~$7/month) to remove this if it matters for your launch
-
-### Option B: Vercel
+ Vercel
 
 This app runs as a serverless function on Vercel via the included `vercel.json`. **`MONGODB_URI` is required**, not optional, when deploying here — admin login sessions are stored in MongoDB specifically so they survive across Vercel's stateless function invocations.
 
@@ -104,14 +88,3 @@ This app runs as a serverless function on Vercel via the included `vercel.json`.
 4. Deploy, then set `DOMAIN` to your live Vercel URL
 5. Vercel doesn't sleep the way Render's free tier does — cold starts add a small delay only after long inactivity, and are much shorter
 
-## 7. Connecting to Instagram
-
-Once your store is live at a real domain:
-1. Set up a [Meta Business Suite](https://business.facebook.com) account and link your Instagram as a Business account
-2. In **Commerce Manager**, create a catalog and add your products
-3. Once approved, tag products in Instagram posts/Reels and run Shopping ads linking to your live site
-4. Add the Meta Pixel snippet to `public/index.html`'s `<head>` to track visitors and build retargeting ads
-
-## A note on licensing
-
-If selling officially branded jerseys (club crests, league/manufacturer logos), that generally requires a licensing agreement with the brand or league — unlicensed replicas can carry legal risk, and Meta will also reject ads for counterfeit goods.
